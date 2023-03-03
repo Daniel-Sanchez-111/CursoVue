@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      {{contador}}
+      <button type="button" v-on:click="startInterval" v-if="isRunning===false">Iniciar</button>
+      <button type="button" v-on:click="stopInterval" v-else>Detener</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            nombre: "daniel",
+            contador: 0,
+            interval: null,
+            isRunning: false,
+          };
+        },
+        mounted() {
+          this.interval = setInterval(() => {
+            this.contador++;
+          }, 1000);
+          this.isRunning = true;
+        },
+        methods: {
+          stopInterval() {
+            clearInterval(this.interval);
+            this.isRunning = false;
+          },
+          startInterval() {
+            this.interval = setInterval(() => {
+              this.contador++;
+            }, 1000);
+            this.isRunning = true;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
