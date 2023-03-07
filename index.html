@@ -8,16 +8,7 @@
   </head>
   <body>
     <div id="app">
-      <ul>
-        <li v-for="fruta in frutas_id" :key="fruta">
-          {{fruta.id}} - {{fruta.nombre}}
-          <ul>
-            <li v-for="(pais, index) in fruta.pais" :key="index">
-              {{pais.nombre_pais}}
-            </li>
-          </ul>
-        </li>
-      </ul>
+      {{usuario}}
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -27,53 +18,20 @@
       createApp({
         data() {
           return {
-            nombre: "",
-            frutas: ["manzana", "pera", "piña"],
-            frutas_id: [
-              {
-                id: 1,
-                nombre: "manzana",
-                pais: [
-                  {
-                    id: 1,
-                    nombre_pais: "mexico",
-                  },
-                  {
-                    id: 2,
-                    nombre_pais: "guatemala",
-                  },
-                ],
-              },
-              {
-                id: 2,
-                nombre: "pera",
-                pais: [
-                  {
-                    id: 3,
-                    nombre_pais: "honduras",
-                  },
-                  {
-                    id: 4,
-                    nombre_pais: "salvador",
-                  },
-                ],
-              },
-              {
-                id: 3,
-                nombre: "piña",
-                pais: [
-                  {
-                    id: 5,
-                    nombre_pais: "mexico",
-                  },
-                  {
-                    id: 6,
-                    nombre_pais: "paraguay",
-                  },
-                ],
-              },
-            ],
+            usuario: []
           };
+        },
+        methods: {
+          getUsuarios(){
+            fetch('https://jsonplaceholder.typicode.com/users')
+              .then(response => response.json())
+              .then(data => {
+                this.usuario = data;
+              })
+          }
+        },
+        mounted() {
+          this.getUsuarios();
         },
       }).mount("#app");
     </script>
