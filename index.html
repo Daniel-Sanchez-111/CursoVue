@@ -8,9 +8,15 @@
   </head>
   <body>
     <div id="app">
-      {{contador}}
-      <button type="button" v-on:click="startInterval" v-if="isRunning===false">Iniciar</button>
-      <button type="button" v-on:click="stopInterval" v-else>Detener</button>
+      <input type="text" v-model="nombre">
+      {{nombre}}
+
+      <select name="" id="" v-model="fruta">
+        <option value="nanzana">manzana</option>
+        <option value="pera">pera</option>
+        <option value="sandia">sandia</option>
+      </select>
+      {{fruta}}
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -20,29 +26,9 @@
       createApp({
         data() {
           return {
-            nombre: "daniel",
-            contador: 0,
-            interval: null,
-            isRunning: false,
+            nombre:"",
+            fruta:""
           };
-        },
-        mounted() {
-          this.interval = setInterval(() => {
-            this.contador++;
-          }, 1000);
-          this.isRunning = true;
-        },
-        methods: {
-          stopInterval() {
-            clearInterval(this.interval);
-            this.isRunning = false;
-          },
-          startInterval() {
-            this.interval = setInterval(() => {
-              this.contador++;
-            }, 1000);
-            this.isRunning = true;
-          },
         },
       }).mount("#app");
     </script>
