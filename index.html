@@ -8,15 +8,9 @@
   </head>
   <body>
     <div id="app">
-      <input type="text" v-model="nombre">
-      {{nombre}}
-
-      <select name="" id="" v-model="fruta">
-        <option value="nanzana">manzana</option>
-        <option value="pera">pera</option>
-        <option value="sandia">sandia</option>
-      </select>
-      {{fruta}}
+      <ul>
+        <li v-for="fruta in frutas_id" :key="fruta">{{fruta.id}} - {{fruta.nombre}}</li>
+      </ul>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -27,7 +21,21 @@
         data() {
           return {
             nombre:"",
-            fruta:""
+            frutas:['manzana','pera','piña'],
+            frutas_id:[
+              {
+                id:1,
+                nombre:'manzana'
+              },
+              {
+                id:2,
+                nombre:'pera'
+              },
+              {
+                id:3,
+                nombre:'piña'
+              }
+            ]
           };
         },
       }).mount("#app");
